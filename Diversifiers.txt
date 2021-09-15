@@ -1,0 +1,19 @@
+Anti Chromatic - Use shades of a single hue for all artwork
+
+Bichromatic - Use only two colors
+
+By the Hand - Use only hand-drawn art
+
+Color Blind Friendly - Use options, modes, or a general design that accommodates color blindness
+
+Everything is Tiny - Limit sprites and tiles to 8x8 pixels
+
+Hidden Secrets - Include secret items, rooms, or features (include a spoiler document for people who can’t find them)
+
+Music Generation - There’s no preconstructed music track; instead, sound effects from gameplay become music
+
+My Own Noise - Record all sound effects yourself
+
+Quick Run - A casual run of the game takes no more than 5 minutes
+
+Shapely - All visuals are basic shapes in solid colors
