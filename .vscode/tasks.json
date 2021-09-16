@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/VimJam 2 Boss[8 Bits to Infinity].csproj",
+                "${workspaceFolder}/VimJam 2 Boss[8 Bits to Infinity] Code Sortout.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/VimJam 2 Boss[8 Bits to Infinity].csproj",
+                "${workspaceFolder}/VimJam 2 Boss[8 Bits to Infinity] Code Sortout.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -32,7 +32,7 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/VimJam 2 Boss[8 Bits to Infinity].csproj",
+                "${workspaceFolder}/VimJam 2 Boss[8 Bits to Infinity] Code Sortout.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],

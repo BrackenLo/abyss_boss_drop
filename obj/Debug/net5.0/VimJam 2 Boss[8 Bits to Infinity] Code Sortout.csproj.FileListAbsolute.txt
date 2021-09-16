@@ -1,0 +1,22 @@
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity] Code Sortout\bin\Debug\net5.0\VimJam 2 Boss[8 Bits to Infinity] Code Sortout.exe
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity] Code Sortout\bin\Debug\net5.0\VimJam 2 Boss[8 Bits to Infinity] Code Sortout.deps.json
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity] Code Sortout\bin\Debug\net5.0\VimJam 2 Boss[8 Bits to Infinity] Code Sortout.runtimeconfig.json
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity] Code Sortout\bin\Debug\net5.0\VimJam 2 Boss[8 Bits to Infinity] Code Sortout.runtimeconfig.dev.json
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity] Code Sortout\bin\Debug\net5.0\VimJam 2 Boss[8 Bits to Infinity] Code Sortout.dll
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity] Code Sortout\bin\Debug\net5.0\ref\VimJam 2 Boss[8 Bits to Infinity] Code Sortout.dll
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity] Code Sortout\bin\Debug\net5.0\VimJam 2 Boss[8 Bits to Infinity] Code Sortout.pdb
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity] Code Sortout\bin\Debug\net5.0\Raylib-cs.dll
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity] Code Sortout\bin\Debug\net5.0\runtimes\linux-x64\native\libraylib.so
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity] Code Sortout\bin\Debug\net5.0\runtimes\osx-x64\native\libraylib.dylib
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity] Code Sortout\bin\Debug\net5.0\runtimes\win-x64\native\raylib.dll
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity] Code Sortout\bin\Debug\net5.0\runtimes\win-x86\native\raylib.dll
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity] Code Sortout\obj\Debug\net5.0\VimJam 2 Boss[8 Bits to Infinity] Code Sortout.csproj.AssemblyReference.cache
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity] Code Sortout\obj\Debug\net5.0\VimJam 2 Boss[8 Bits to Infinity] Code Sortout.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity] Code Sortout\obj\Debug\net5.0\VimJam 2 Boss[8 Bits to Infinity] Code Sortout.AssemblyInfoInputs.cache
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity] Code Sortout\obj\Debug\net5.0\VimJam 2 Boss[8 Bits to Infinity] Code Sortout.AssemblyInfo.cs
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity] Code Sortout\obj\Debug\net5.0\VimJam 2 Boss[8 Bits to Infinity] Code Sortout.csproj.CoreCompileInputs.cache
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity] Code Sortout\obj\Debug\net5.0\VimJam 2 Boss[8 Bits to Infinity] Code Sortout.csproj.CopyComplete
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity] Code Sortout\obj\Debug\net5.0\VimJam 2 Boss[8 Bits to Infinity] Code Sortout.dll
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity] Code Sortout\obj\Debug\net5.0\ref\VimJam 2 Boss[8 Bits to Infinity] Code Sortout.dll
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity] Code Sortout\obj\Debug\net5.0\VimJam 2 Boss[8 Bits to Infinity] Code Sortout.pdb
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity] Code Sortout\obj\Debug\net5.0\VimJam 2 Boss[8 Bits to Infinity] Code Sortout.genruntimeconfig.cache
