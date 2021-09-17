@@ -46,4 +46,7 @@ public class GameCamera {
         virtualScreenHeight = y;
         adjustCamera();
     }
+
+    public float VirutalScreenWidth {get {return virtualScreenWidth;}}
+    public float VirutalScreenHeight {get {return virtualScreenHeight;}}
 }

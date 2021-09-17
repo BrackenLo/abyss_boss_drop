@@ -45,11 +45,13 @@ public class Game {
     public Texture2D playerWeaponTexture;
     public Texture2D bossTexture;
     public Texture2D projectileTexture;
+    public Texture2D cursorTexture;
 
     //=======================================================================================
 
     public bool gameRunning = true;
     public bool playerFallen = false;
+    public int playerLives = 2;
 
     //=======================================================================================
 
@@ -93,7 +95,9 @@ public class Game {
         SetTargetFPS(60);
         SetWindowState(ConfigFlags.FLAG_WINDOW_RESIZABLE);
 
-        //MaximizeWindow();
+        HideCursor();
+
+        MaximizeWindow();
 
         windowCreated = true;
     }
@@ -106,17 +110,18 @@ public class Game {
         playerWeaponTexture = LoadTexture("assets/playerWeapon.png");
         bossTexture = LoadTexture("assets/bossFace.png");
         projectileTexture = LoadTexture("assets/projectile.png");
+        cursorTexture = LoadTexture("assets/cursor.png");
 
         audio.addTrack("phase1", LoadMusicStream("assets/xDeviruchi-MysteriousDungeon.wav"));
 
         Dictionary<AudioController.trackPart, Music> phase2Music = new Dictionary<AudioController.trackPart, Music>();
-        phase2Music.Add(AudioController.trackPart.intro, LoadMusicStream("assets/Minigame/intro.wav"));
-        phase2Music.Add(AudioController.trackPart.loop, LoadMusicStream("assets/Minigame/loop.wav"));
+        phase2Music.Add(AudioController.trackPart.intro, LoadMusicStream("assets/minigameIntro.wav"));
+        phase2Music.Add(AudioController.trackPart.loop, LoadMusicStream("assets/minigameLoop.wav"));
         audio.addTrack("phase2", phase2Music);
 
         Dictionary<AudioController.trackPart, Music> phase3Music = new Dictionary<AudioController.trackPart, Music>();
-        phase3Music.Add(AudioController.trackPart.intro, LoadMusicStream("assets/PrepareForBattle!/intro.wav"));
-        phase3Music.Add(AudioController.trackPart.loop, LoadMusicStream("assets/PrepareForBattle!/loop.wav"));
+        phase3Music.Add(AudioController.trackPart.intro, LoadMusicStream("assets/prepareForBattleIntro.wav"));
+        phase3Music.Add(AudioController.trackPart.loop, LoadMusicStream("assets/prepareForBattleLoop.wav"));
         audio.addTrack("phase3", phase3Music);
 
         resetGame();
@@ -131,9 +136,10 @@ public class Game {
 
         gameRunning = true;
         playerFallen = false;
+        playerLives = 2;
 
-        audio.stopAll();
-        //audio.playTrack("phase1", false);
+        audio.stopAll(true);
+        audio.playTrack("phase1", true);
     }
 
     private void startLoop() {
@@ -194,13 +200,13 @@ public class Game {
         //------------------------------------------------------
         //Player stuff
 
-        if (playerFallen) return;
+        if (!playerFallen)
+            player.update(delta);
 
-        player.update(delta);
+        //------------------------------------------------------
+        //Camera Stuff
 
-
-        float cameraDistance = (player.Origin - boss.Origin).Length();
-
+        float cameraDistance = (player.Origin - boss.Origin).Length() / 2;
         if (cameraDistance > maxCameraPlayerDistance)  {
             cameraDistance = maxCameraPlayerDistance;
         }
@@ -210,6 +216,9 @@ public class Game {
 
         camera.moveTowards(cameraTarget);
 
+        //------------------------------------------------------
+        //Abyss stuff
+        
         playerAbyssPos = player.Origin * abyssScaleFactor;
         playerAbyssPos.X = Math.Clamp(playerAbyssPos.X, 0, 2);
         playerAbyssPos.Y = Math.Clamp(playerAbyssPos.Y, 0, 2);
@@ -227,15 +236,23 @@ public class Game {
         int abyssColorVal = (int)(abyssColor.r * abyssDarkenScale);
         drawAbyss(7, abyssColorVal, firstAbyss, playerAbyssPos.X, playerAbyssPos.Y);
 
+        Projectile.draw2D(true, projectileTexture);
         boss.draw2D(true);
 
         map.draw2D(tileTexture);
 
-        Projectile.draw2D(projectileTexture);
+        Projectile.draw2D(false, projectileTexture);
 
         if (!playerFallen)
             player.draw2D();
         boss.draw2D(false);
+
+        Vector2 mousePos = camera.GetScreenToWorld(new Vector2(GetMouseX(), GetMouseY()));
+
+
+        DrawTextureV(   cursorTexture, 
+                        mousePos - (new Vector2(7, 7) / 2), 
+                        player.GetColor());
 
     }
 
@@ -265,7 +282,12 @@ public class Game {
 
     private void draw() {
 
+        //DrawCircle(GetScreenWidth() / 2, GetScreenHeight() / 2, 3, Color.RED);
+
         DrawText($"FPS: {GetFPS()}", 10, 10, 20, Color.RED);
+        //DrawText($"Width: {camera.VirutalScreenWidth}", 10, 40, 20, Color.RED);
+        //DrawText($"Height: {camera.VirutalScreenHeight}", 10, 70, 20, Color.RED);
+
         player.draw();
         boss.draw();
     }

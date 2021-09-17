@@ -1,0 +1,10 @@
+is_global = true
+build_property.TargetFramework = net5.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.PublishSingleFile = 
+build_property.IncludeAllContentForSelfExtract = 
+build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
+build_property.RootNamespace = VimJam_2_Boss_8_Bits_to_Infinity__Code_Sortout
+build_property.ProjectDir = c:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\

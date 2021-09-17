@@ -121,11 +121,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\sharp\\Documents\\Programming\\RaylibC#\\VimJam 2 Boss[8 Bits to Infinity] Code Sortout\\VimJam 2 Boss[8 Bits to Infinity] Code Sortout.csproj",
-      "projectName": "VimJam 2 Boss[8 Bits to Infinity] Code Sortout",
-      "projectPath": "c:\\Users\\sharp\\Documents\\Programming\\RaylibC#\\VimJam 2 Boss[8 Bits to Infinity] Code Sortout\\VimJam 2 Boss[8 Bits to Infinity] Code Sortout.csproj",
+      "projectUniqueName": "C:\\Users\\sharp\\Documents\\Programming\\RaylibC#\\VimJam 2 Boss[8 Bits to Infinity]\\VimJam 2 Boss[8 Bits to Infinity].csproj",
+      "projectName": "VimJam 2 Boss[8 Bits to Infinity]",
+      "projectPath": "C:\\Users\\sharp\\Documents\\Programming\\RaylibC#\\VimJam 2 Boss[8 Bits to Infinity]\\VimJam 2 Boss[8 Bits to Infinity].csproj",
       "packagesPath": "C:\\Users\\sharp\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\sharp\\Documents\\Programming\\RaylibC#\\VimJam 2 Boss[8 Bits to Infinity] Code Sortout\\obj\\",
+      "outputPath": "C:\\Users\\sharp\\Documents\\Programming\\RaylibC#\\VimJam 2 Boss[8 Bits to Infinity]\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\sharp\\AppData\\Roaming\\NuGet\\NuGet.Config",

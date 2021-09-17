@@ -38,14 +38,17 @@ public class AudioController {
                 track.trackVolume = Math.Max(0, track.trackVolume - 0.01f);
                 SetMusicVolume(currentPart, track.trackVolume);
 
-                if (track.trackVolume == 0)
+                if (track.trackVolume == 0) {
                     toRemove.Add(track);
+                    Console.WriteLine($"Stopping track '{track.trackName}' after fading out");
+                }
             }
             if (!IsMusicPlaying(currentPart)) {
                 if (track.currentlyPlaying == trackPart.intro) {
                     if (track.trackParts.ContainsKey(trackPart.loop)) {
                         track.currentlyPlaying = trackPart.loop;
-                        PlayMusicStream(track.trackParts[trackPart.loop]);
+                        PlayMusicStream(track.getCurrentTrack());
+                        SetMusicVolume(track.getCurrentTrack(), track.trackVolume);
                     }
                 }
             }
@@ -53,6 +56,7 @@ public class AudioController {
         }
 
         foreach (AudioTrack track in toRemove) {
+            
             StopMusicStream(track.getCurrentTrack());
             currentlyPlaying.Remove(track);
         }
@@ -98,15 +102,28 @@ public class AudioController {
             newTrack.trackName = trackName;
             newTrack.currentlyPlaying = trackPart.intro;
 
-            currentlyPlaying.Add(newTrack);
-
             if (fadein) {
                 newTrack.trackVolume = 0;
                 newTrack.currentlyDoing = AudioTrack.trackDoing.fadingIn;
             }
 
+            if (IsMusicPlaying(newTrack.getCurrentTrack())) {
+                AudioTrack toRemove = null;
+                foreach (AudioTrack track in currentlyPlaying) {
+                    if (track.getCurrentTrack().Equals(newTrack.getCurrentTrack())) {
+                        toRemove = track;
+                    }
+                }
+                if (toRemove != null) { 
+                    currentlyPlaying.Remove(toRemove);
+                }
+                StopMusicStream(newTrack.getCurrentTrack());
+            }   
+            
+            currentlyPlaying.Add(newTrack);
             PlayMusicStream(newTrack.getCurrentTrack());
             SetMusicVolume(newTrack.getCurrentTrack(), newTrack.trackVolume);
+            
 
         }
         else {
@@ -131,11 +148,16 @@ public class AudioController {
         }
     }
 
-    public void stopAll() {
+    public void stopAll(bool fadeout) {
         foreach (AudioTrack track in currentlyPlaying) {
-            StopMusicStream(track.trackParts[track.currentlyPlaying]);
+            if (fadeout) {
+                track.currentlyDoing = AudioTrack.trackDoing.fadingOut;
+            }
+            else {
+                StopMusicStream(track.trackParts[track.currentlyPlaying]);
+                currentlyPlaying.Clear();
+            }
         }
-        currentlyPlaying.Clear();
     }
 
     //------------------------------------------------------

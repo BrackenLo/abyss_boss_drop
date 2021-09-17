@@ -22,6 +22,9 @@ public class Player : Character {
     private bool isDodging = false;
     private Vector2 dodgeTarget = Vector2.Zero;
 
+    private float maxDodgeCooldown = 0.3f;
+    private float dodgeCooldown = 0;
+
     private Weapon weapon;
 
     //=======================================================================================
@@ -49,9 +52,11 @@ public class Player : Character {
             if (Vector2.Distance(Origin, dodgeTarget) < 2) {
                 isDodging = false;
                 velocity = Vector2.Zero;
+                knockback = Vector2.Zero;
             }
         }
         else {
+            dodgeCooldown += delta;
             keyboardUpdate(delta);
             fallCheck();
         }
@@ -72,17 +77,18 @@ public class Player : Character {
         if (!isDodging) {
 
             if (IsMouseButtonDown(MouseButton.MOUSE_LEFT_BUTTON) && weapon.attackCooldown >= weapon.attackMaxCooldown) {
-                Projectile.PlayerProjectiles.Add(new Projectile(weapon.position, normalizedDirToMouse, weapon.projectileSpeed, weapon.projectileDamage));
+                Projectile.PlayerProjectiles.Add(new Projectile(weapon.position, normalizedDirToMouse, weapon.projectileSpeed, weapon.projectileDamage, 3.2f));
                 weapon.attackCooldown = 0;
             }
             
-            if (IsMouseButtonDown(MouseButton.MOUSE_RIGHT_BUTTON)) {
+            if (IsMouseButtonDown(MouseButton.MOUSE_RIGHT_BUTTON) && dodgeCooldown > maxDodgeCooldown) {
                 dodgePreview = true;
                 dodgeTarget = Origin + (normalizedDirToMouse * dodgeDistance);
             }
-            if (IsMouseButtonReleased(MouseButton.MOUSE_RIGHT_BUTTON)) {
+            if (IsMouseButtonReleased(MouseButton.MOUSE_RIGHT_BUTTON) && dodgeCooldown > maxDodgeCooldown) {
                 dodgePreview = false;
                 isDodging = true;
+                dodgeCooldown = 0;
             }
         }
     }
@@ -118,8 +124,23 @@ public class Player : Character {
             }
         }
         if (!playerStanding) {
-            Console.WriteLine("Player has fallen!");
-            Game.Instance.playerFallen = true;
+            if (dodgePreview) {
+                dodgePreview = false;
+                isDodging = true;
+                dodgeCooldown = 0;
+            }
+            else {
+                Console.WriteLine("Player has fallen!");
+                if (Game.Instance.playerLives > 0) {
+                    Game.Instance.playerLives--;
+                    position = Game.Instance.map.playerSpawn;
+                    velocity = Vector2.Zero;
+                    knockback = Vector2.Zero;
+                }
+                else {
+                    Game.Instance.playerFallen = true;
+                }
+            }
         }
     }
 
@@ -144,7 +165,7 @@ public class Player : Character {
         Rectangle playerHealthBarBack = new Rectangle();
             playerHealthBarBack.width = screenWidth * 0.4f;
             playerHealthBarBack.height = screenHeight * 0.05f;
-            playerHealthBarBack.x = 10;
+            playerHealthBarBack.x = 35;
             playerHealthBarBack.y = screenHeight - playerHealthBarBack.height - 10;
         DrawRectangleRec(playerHealthBarBack, new Color(40, 40, 40, 150));
 
@@ -154,6 +175,8 @@ public class Player : Character {
             playerHealthBarFront.x = playerHealthBarBack.x + (playerHealthBarBack.width * 0.01f);
             playerHealthBarFront.y = playerHealthBarBack.y + (playerHealthBarBack.height - playerHealthBarFront.height) / 2;
         DrawRectangleRec(playerHealthBarFront, color);
+
+        DrawText($"{Game.Instance.playerLives}", 5, (int)playerHealthBarBack.y, 50, color);
 
     }
 

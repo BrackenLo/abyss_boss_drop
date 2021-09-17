@@ -9,6 +9,7 @@ public class Projectile {
     public static List<Projectile> PlayerProjectiles = new List<Projectile>();
     public static List<Projectile> EnemyProjectiles = new List<Projectile>();
     public static List<Projectile> EnemyHomingProjectiles = new List<Projectile>();
+    public static List<Projectile> EnemySubmergedProjectiles = new List<Projectile>();
 
     public const int ProjectileRadius = 4;
 
@@ -18,7 +19,7 @@ public class Projectile {
     public int damage;
     public float expire;
 
-    public Projectile(Vector2 newPos, Vector2 newDir, int newSpeed, int newDamage, int newExpire = 6) {
+    public Projectile(Vector2 newPos, Vector2 newDir, int newSpeed, int newDamage, float newExpire = 6) {
         position = newPos;
         direction = newDir;
         speed = newSpeed;
@@ -33,6 +34,7 @@ public class Projectile {
         updatePlayerProjectiles(delta);
         updateEnemyProjectiles(delta);
         updateEnemyHomingProjectiles(delta);
+        updateEnemySubmergedProjectiles(delta);
     }
 
     public static void clearExpired() {
@@ -45,6 +47,7 @@ public class Projectile {
         PlayerProjectiles.Clear();
         EnemyProjectiles.Clear();
         EnemyHomingProjectiles.Clear();
+        EnemySubmergedProjectiles.Clear();
     }
 
     private static void updatePlayerProjectiles(float delta) {
@@ -136,6 +139,36 @@ public class Projectile {
         }
     }
 
+    private static void updateEnemySubmergedProjectiles(float delta) {
+
+        List<Projectile> toRemove = new List<Projectile>();
+
+        for (int n = 0; n < EnemySubmergedProjectiles.Count; n++) {
+            Projectile projectile = updateProjectile(delta, EnemySubmergedProjectiles[n]);
+
+            if (projectile.expire <= 0) {
+                bool projectileCovered = false;
+                foreach (Rectangle tile in Game.Instance.map.allTiles.Values) {
+                    if (Vector2.Distance(new Vector2(tile.x, tile.y), projectile.position) < 15) {
+                        projectileCovered = true;
+                        break;
+                    };
+                }
+                if (!projectileCovered) {
+                    projectile.expire = 6;
+                    EnemyHomingProjectiles.Add(projectile);
+                    toRemove.Add(projectile);
+                }
+            }
+
+            EnemySubmergedProjectiles[n] = projectile;
+        }
+
+        foreach(Projectile projectile in toRemove) {
+            EnemySubmergedProjectiles.Remove(projectile);
+        }
+    }
+
     private static Projectile updateProjectile(float delta, Projectile toUpdate) {
 
         toUpdate.position = toUpdate.position + ((toUpdate.direction * toUpdate.speed) * delta);
@@ -144,11 +177,15 @@ public class Projectile {
 
     }
 
-    public static void draw2D(Texture2D projectileTexture) {
+    public static void draw2D(bool firstCall, Texture2D projectileTexture) {
 
-        drawProjectiles(PlayerProjectiles, projectileTexture, Game.Instance.player.GetColor());
-        drawProjectiles(EnemyProjectiles, projectileTexture, Game.Instance.boss.GetColor());
-        drawProjectiles(EnemyHomingProjectiles, projectileTexture, Game.Instance.boss.GetColor());
+        if (firstCall)
+            drawProjectiles(EnemySubmergedProjectiles, projectileTexture, GameTools.DarkenColor(Game.Instance.boss.GetColor(), 0.4f));
+        else {
+            drawProjectiles(PlayerProjectiles, projectileTexture, Game.Instance.player.GetColor());
+            drawProjectiles(EnemyProjectiles, projectileTexture, Game.Instance.boss.GetColor());
+            drawProjectiles(EnemyHomingProjectiles, projectileTexture, Game.Instance.boss.GetColor());
+        }
 
     }
 
