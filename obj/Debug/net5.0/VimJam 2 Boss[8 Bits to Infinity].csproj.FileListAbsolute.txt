@@ -20,16 +20,30 @@ C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\
 C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\obj\Debug\net5.0\ref\VimJam 2 Boss[8 Bits to Infinity].dll
 C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\obj\Debug\net5.0\VimJam 2 Boss[8 Bits to Infinity].pdb
 C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\obj\Debug\net5.0\VimJam 2 Boss[8 Bits to Infinity].genruntimeconfig.cache
-C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\bossFace.png
-C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\cursor.png
-C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\floorTile.png
-C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\player.png
-C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\playerWeapon.png
-C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\projectile.png
-C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\xDeviruchi-MysteriousDungeon.wav
-C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\minigameEnd.wav
-C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\minigameIntro.wav
-C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\minigameLoop.wav
-C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\prepareForBattleEnd.wav
-C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\prepareForBattleIntro.wav
-C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\prepareForBattleLoop.wav
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\raylib_32x32.png
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\images\bossFace.png
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\images\cursor.png
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\images\floorTile.png
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\images\player.png
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\images\playerWeapon.png
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\images\projectile.png
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\audio\BossHit1.wav
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\audio\HitDamage1.wav
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\audio\minigameEnd.wav
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\audio\minigameIntro.wav
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\audio\minigameLoop.wav
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\audio\prepareForBattleEnd.wav
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\audio\prepareForBattleIntro.wav
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\audio\prepareForBattleLoop.wav
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\audio\xDeviruchi-MysteriousDungeon.wav
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\images\playerWalkFrames.png
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\images\playerIdleFrames.png
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\images\bossShout.png
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\images\bossSleep.png
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\icon.gif
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\images\KeyA.png
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\images\KeyD.png
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\images\KeyM1.png
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\images\KeyM2.png
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\images\KeyS.png
+C:\Users\sharp\Documents\Programming\RaylibC#\VimJam 2 Boss[8 Bits to Infinity]\bin\Debug\net5.0\assets\images\KeyW.png

@@ -8,13 +8,32 @@ public class Player : Character {
 
     //=======================================================================================
 
+    private enum playerAnimationTypes {
+        idle,
+        walkForward,
+        walkBackward,
+        walkUp,
+        walkDown
+    }
+
+    private TextureAnimation[] playerAnimations = new TextureAnimation[Enum.GetNames(typeof(playerAnimationTypes)).Length];
+    private playerAnimationTypes currentAnimation;
+
+    private bool lookingLeft = false;
+
+    //---------------------------------------------------------
+
     private Vector2 velocity = Vector2.Zero;
     private float maxSpeed = 0.6f;
     private float accel = 20;
     private float deaccel = 10;
 
+    //---------------------------------------------------------
+
     public Vector2 knockback = Vector2.Zero;
     private float knockbackResistance = 0.5f;
+
+    //---------------------------------------------------------
 
     private bool dodgePreview = false;
     private int dodgeDistance = 30;
@@ -25,13 +44,29 @@ public class Player : Character {
     private float maxDodgeCooldown = 0.3f;
     private float dodgeCooldown = 0;
 
+    //---------------------------------------------------------
+
     private Weapon weapon;
+
+    //---------------------------------------------------------
+
+    private float reviveCooldown = 0;
+    private float maxReviveCooldown = 1;
+
+    public bool playerImmune = false;
+    private float immuneCooldown = 0;
+    private float maxImmuneCooldown = 2.4f;
 
     //=======================================================================================
 
-    public Player(float x, float y) : base(x, y, Game.Instance.playerTexture, new Vector2(8, 8), 60) {
+    public Player(float x, float y) : base(x, y, new Vector2(8, 8), 120) {
+        playerAnimations[(int)playerAnimationTypes.walkForward] = new TextureAnimation(4, 5, new Vector2(8, 8), Game.Instance.playerWalkForwardFrames);
+        playerAnimations[(int)playerAnimationTypes.idle] = new TextureAnimation(2, 1, new Vector2(8, 8), Game.Instance.playerIdleFrames);
+        currentAnimation = playerAnimationTypes.idle;
+
         color = new Color(239, 0, 183, 255);
         weapon = new Weapon(8, 60, 10, 1);
+        healthChangeEvent += healthValueChanged;
     }
 
     //=======================================================================================
@@ -44,21 +79,83 @@ public class Player : Character {
 
     public void update(float delta) {
 
+        if (playerImmune) {
+            if (immuneCooldown > maxImmuneCooldown)
+                playerImmune = false;
+            else    immuneCooldown += delta;
+        }
+
+        if (!Game.Instance.playerFallen) {
+
+            weapon.attackCooldown += delta;
+            playerAnimations[(int)currentAnimation].update(delta);
+
+            mouseUpdate(delta);
+
+            if (isDodging) {
+                Origin = Vector2.Lerp(Origin, dodgeTarget, dodgeSpeed * delta);
+                if (Vector2.Distance(Origin, dodgeTarget) < 2) {
+                    isDodging = false;
+                    velocity = Vector2.Zero;
+                    knockback = Vector2.Zero;
+                }
+            }
+            else {
+                dodgeCooldown += delta;
+                keyboardUpdate(delta);
+                fallCheck();
+            }
+        }
+        else {
+            if (reviveCooldown > maxReviveCooldown) {
+
+                if (IsMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON)) {
+                    
+                    Vector2 mapPos = Origin;
+                    mapPos.X = mapPos.X / Tile.TILE_WIDTH;
+                    mapPos.Y = mapPos.Y / Tile.TILE_HEIGHT;
+
+                    Vector2[] tiles = Game.Instance.map.getTilesInRange(mapPos, 3);
+                    float smallestDistance = 9999;
+                    Vector2 closestTile = Game.Instance.map.playerSpawn;
+
+                    for (int n = 0; n < tiles.Length; n++) {
+                        tiles[n].X *= Tile.TILE_WIDTH;
+                        tiles[n].Y *= Tile.TILE_HEIGHT;
+                        float distance = Vector2.Distance(tiles[n], position);
+                        if (distance < smallestDistance) {
+                            smallestDistance = distance;
+                            closestTile = tiles[n];
+                        }
+                    }
+
+                    position = closestTile;
+                    reviveCooldown = 0;
+                    Game.Instance.playerFallen = false;
+
+                    playerImmune = true;
+                    immuneCooldown = 0;
+                }
+            }
+            else {
+                reviveCooldown += delta;
+            }
+        }
+    }
+
+    public void gameFinishedUpdate(float delta) {
+
         weapon.attackCooldown += delta;
         mouseUpdate(delta);
-
         if (isDodging) {
             Origin = Vector2.Lerp(Origin, dodgeTarget, dodgeSpeed * delta);
             if (Vector2.Distance(Origin, dodgeTarget) < 2) {
                 isDodging = false;
-                velocity = Vector2.Zero;
-                knockback = Vector2.Zero;
             }
         }
         else {
             dodgeCooldown += delta;
             keyboardUpdate(delta);
-            fallCheck();
         }
 
     }
@@ -77,7 +174,7 @@ public class Player : Character {
         if (!isDodging) {
 
             if (IsMouseButtonDown(MouseButton.MOUSE_LEFT_BUTTON) && weapon.attackCooldown >= weapon.attackMaxCooldown) {
-                Projectile.PlayerProjectiles.Add(new Projectile(weapon.position, normalizedDirToMouse, weapon.projectileSpeed, weapon.projectileDamage, 3.2f));
+                Projectile.PlayerProjectiles.Add(new Projectile(weapon.position, normalizedDirToMouse, weapon.projectileSpeed, weapon.projectileDamage, 5));
                 weapon.attackCooldown = 0;
             }
             
@@ -108,10 +205,16 @@ public class Player : Character {
             knockback = Vector2.Zero;
         }
 
-        if (moveDir != Vector2.Zero)
+        if (moveDir != Vector2.Zero) {  //Move forwards
             velocity = Vector2.Lerp(velocity, moveDir * maxSpeed, accel * delta);
-        else
+            currentAnimation = playerAnimationTypes.walkForward;
+            if (moveDir.X > 0)      lookingLeft = false;
+            else if (moveDir.X < 0) lookingLeft = true;
+        }
+        else {  //Slow down
             velocity = Vector2.Lerp(velocity, Vector2.Zero, deaccel * delta);
+            currentAnimation = playerAnimationTypes.idle;
+        }
 
         position += velocity;
     }
@@ -131,14 +234,16 @@ public class Player : Character {
             }
             else {
                 Console.WriteLine("Player has fallen!");
+                Game.Instance.playerFallen = true;
+
                 if (Game.Instance.playerLives > 0) {
                     Game.Instance.playerLives--;
-                    position = Game.Instance.map.playerSpawn;
                     velocity = Vector2.Zero;
                     knockback = Vector2.Zero;
                 }
                 else {
-                    Game.Instance.playerFallen = true;
+                    Game.Instance.playerDead = true;
+                    currentHealth = 0;
                 }
             }
         }
@@ -146,12 +251,27 @@ public class Player : Character {
 
     //=======================================================================================
 
+    private void healthValueChanged(int newHealth) {
+        if (newHealth == 0) {
+            Game.Instance.playerDead = true;
+            Game.Instance.playerFallen = true;
+            Game.Instance.playerLives = 0;
+        }
+    }
+
+    //=======================================================================================
+
     public void draw2D() {
+        if (playerImmune) {
+            DrawCircleV(Origin, 6, GameTools.DarkenColor(color, 0.3f));
+        }
+
         if (dodgePreview) {
             Color dodgeLineColor = ColorAlpha(color, 0.3f);
             DrawLineEx(Origin, dodgeTarget, 1, dodgeLineColor);
         }
-        DrawTextureV(texture, position, color);
+        playerAnimations[(int)currentAnimation].drawTexture(Rect, 0, lookingLeft, color);
+        //DrawTextureV(texture, position, color);
         DrawTextureEx(weapon.texture, weapon.Origin, weapon.angle, 1, color);
     }
 
@@ -159,8 +279,8 @@ public class Player : Character {
 
     public void draw() {
 
-        float screenWidth = GetScreenWidth();
-        float screenHeight = GetScreenHeight();
+        int screenWidth = GetScreenWidth();
+        int screenHeight = GetScreenHeight();
 
         Rectangle playerHealthBarBack = new Rectangle();
             playerHealthBarBack.width = screenWidth * 0.4f;
@@ -177,6 +297,33 @@ public class Player : Character {
         DrawRectangleRec(playerHealthBarFront, color);
 
         DrawText($"{Game.Instance.playerLives}", 5, (int)playerHealthBarBack.y, 50, color);
+
+        if (Game.Instance.playerFallen && !Game.Instance.playerDead && reviveCooldown > maxReviveCooldown) {
+            int yPos = screenHeight / 2;
+
+            string text = "Press Mouse 1 to get back up";
+            int textWidth = MeasureText(text, 36);
+            DrawText(text, screenWidth / 2 - textWidth / 2, yPos, 36, color);
+
+            string text2 = $"Recoveries remaining = {Game.Instance.playerLives}";
+            int textWidth2 = MeasureText(text2, 22);
+            DrawText(text2, screenWidth / 2 - textWidth2 / 2, (int)(yPos * 1.1f), 22, color);
+        }
+        else if (Game.Instance.playerDead) {
+            int yPos = GetScreenHeight() / 2;
+
+            string text = "You are dead!";
+            int textWidth = MeasureText(text, 36);
+            DrawText(text, screenWidth / 2 - textWidth / 2, yPos, 36, color);
+
+            string text2 = $"You lasted {Game.Instance.gameTime.ToString("0")} seconds";
+            int textWidth2 = MeasureText(text2, 22);
+            DrawText(text2, screenWidth / 2 - textWidth2 / 2, (int)(yPos * 1.1f), 22, color);
+
+            string text3 = $"Press R to restart or Escape to return to main menu";
+            int textWidth3 = MeasureText(text3, 36);
+            DrawText(text3, screenWidth / 2 - textWidth3 / 2, (int)(yPos * 1.2f), 36, color);
+        }
 
     }
 

@@ -11,7 +11,8 @@ public class Projectile {
     public static List<Projectile> EnemyHomingProjectiles = new List<Projectile>();
     public static List<Projectile> EnemySubmergedProjectiles = new List<Projectile>();
 
-    public const int ProjectileRadius = 4;
+    public const int EnemyProjectileRadius = 3;
+    public const int FriendlyProjectileRadius = 4;
 
     public Vector2 position;
     public Vector2 direction;
@@ -61,10 +62,12 @@ public class Projectile {
 
             if (!boss.Untouchable) {
                 Vector2 bossDirection = Vector2.Normalize(boss.Origin - projectile.position);
-                Vector2 toCheck = projectile.position + (bossDirection * Projectile.ProjectileRadius);
+                Vector2 toCheck = projectile.position + (bossDirection * Projectile.FriendlyProjectileRadius);
                 if (Raylib.CheckCollisionPointRec(toCheck, boss.Rect)) {
-                    if (!boss.Immune)
+                    if (!boss.Immune) {
                         boss.CurrentHealth -= projectile.damage;
+                        Raylib.PlaySound(Game.Instance.bossHitSound);
+                    }
                     projectile.expire = 0;
                 }
             }
@@ -86,10 +89,14 @@ public class Projectile {
 
             if (!player.IsDodging && !Game.Instance.playerFallen) {
                 Vector2 playerDirection = Vector2.Normalize(player.Origin - projectile.position);
-                Vector2 toCheck = projectile.position + (playerDirection * Projectile.ProjectileRadius);
+                Vector2 toCheck = projectile.position + (playerDirection * Projectile.EnemyProjectileRadius);
                 if (Raylib.CheckCollisionPointRec(toCheck, player.Rect)) {
-                    player.knockback += playerDirection * (projectile.damage * player.KnockbackResistance);
-                    player.CurrentHealth -= projectile.damage;
+                    if (!player.playerImmune) {
+                        player.knockback += playerDirection * (projectile.damage * player.KnockbackResistance);
+                        player.CurrentHealth -= projectile.damage;
+                        Game.Instance.camera.Shake = 0.3f;
+                        Raylib.PlaySound(Game.Instance.playerHitSound);
+                    }
                     projectile.expire = 0;
                 }
             }
@@ -117,10 +124,14 @@ public class Projectile {
             projectile = updateProjectile(delta, projectile);
 
             if (!player.IsDodging && !Game.Instance.playerFallen) {
-                Vector2 toCheck = projectile.position + (playerDirection * Projectile.ProjectileRadius);
+                Vector2 toCheck = projectile.position + (playerDirection * Projectile.EnemyProjectileRadius);
                 if (Raylib.CheckCollisionPointRec(toCheck, player.Rect)) {
-                    player.knockback += playerDirection * (projectile.damage * player.KnockbackResistance);
-                    player.CurrentHealth -= projectile.damage;
+                    if (!player.playerImmune) {
+                        player.knockback += playerDirection * (projectile.damage * player.KnockbackResistance);
+                        player.CurrentHealth -= projectile.damage;
+                        Game.Instance.camera.Shake = 0.3f;
+                        Raylib.PlaySound(Game.Instance.playerHitSound);
+                    }
                     projectile.expire = 0;
                     toRemove.Add(projectile);
                 }
@@ -182,9 +193,11 @@ public class Projectile {
         if (firstCall)
             drawProjectiles(EnemySubmergedProjectiles, projectileTexture, GameTools.DarkenColor(Game.Instance.boss.GetColor(), 0.4f));
         else {
+            Color bossProjectileColor = GameTools.DarkenColor(Game.Instance.boss.GetColor(), 0.8f);
+
             drawProjectiles(PlayerProjectiles, projectileTexture, Game.Instance.player.GetColor());
-            drawProjectiles(EnemyProjectiles, projectileTexture, Game.Instance.boss.GetColor());
-            drawProjectiles(EnemyHomingProjectiles, projectileTexture, Game.Instance.boss.GetColor());
+            drawProjectiles(EnemyProjectiles, projectileTexture, bossProjectileColor);
+            drawProjectiles(EnemyHomingProjectiles, projectileTexture, bossProjectileColor);
         }
 
     }
@@ -193,7 +206,7 @@ public class Projectile {
         foreach (Projectile projectile in toDraw) {
             Raylib.DrawTextureV(
                 projectileTexture,
-                projectile.position - new Vector2(Projectile.ProjectileRadius, Projectile.ProjectileRadius),
+                projectile.position - new Vector2(Projectile.FriendlyProjectileRadius, Projectile.FriendlyProjectileRadius),
                 color);
         }
     }

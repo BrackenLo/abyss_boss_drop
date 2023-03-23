@@ -121,11 +121,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sharp\\Documents\\Programming\\RaylibC#\\VimJam 2 Boss[8 Bits to Infinity]\\VimJam 2 Boss[8 Bits to Infinity].csproj",
-      "projectName": "VimJam 2 Boss[8 Bits to Infinity]",
-      "projectPath": "C:\\Users\\sharp\\Documents\\Programming\\RaylibC#\\VimJam 2 Boss[8 Bits to Infinity]\\VimJam 2 Boss[8 Bits to Infinity].csproj",
+      "projectUniqueName": "C:\\Users\\sharp\\Documents\\Programming\\RaylibC#\\AbyssBossDrop\\Abyss Boss Drop.csproj",
+      "projectName": "Abyss Boss Drop",
+      "projectPath": "C:\\Users\\sharp\\Documents\\Programming\\RaylibC#\\AbyssBossDrop\\Abyss Boss Drop.csproj",
       "packagesPath": "C:\\Users\\sharp\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sharp\\Documents\\Programming\\RaylibC#\\VimJam 2 Boss[8 Bits to Infinity]\\obj\\",
+      "outputPath": "C:\\Users\\sharp\\Documents\\Programming\\RaylibC#\\AbyssBossDrop\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\sharp\\AppData\\Roaming\\NuGet\\NuGet.Config",

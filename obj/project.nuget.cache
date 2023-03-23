@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "vjw75oMtxkIFZ3tSnixg4ETrAQas4TwXiV/RIqPdNNSHf7sKhgXjZ4GOlGOi3lizFs91kqtQQQ5Xb4LVeU4hVA==",
+  "dgSpecHash": "/OJ4ysZIaEQq8Lr6HzxpW29wT0EXcKUIE8I6msJqF+uyU1zHua0WjuvrvnfcktZfAIfferhbcvuCrK50xwJ2ug==",
   "success": true,
-  "projectFilePath": "C:\\Users\\sharp\\Documents\\Programming\\RaylibC#\\VimJam 2 Boss[8 Bits to Infinity]\\VimJam 2 Boss[8 Bits to Infinity].csproj",
+  "projectFilePath": "C:\\Users\\sharp\\Documents\\Programming\\RaylibC#\\AbyssBossDrop\\Abyss Boss Drop.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sharp\\.nuget\\packages\\raylib-cs\\3.7.0\\raylib-cs.3.7.0.nupkg.sha512",
     "C:\\Users\\sharp\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512"

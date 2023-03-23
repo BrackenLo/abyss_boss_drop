@@ -13,7 +13,6 @@ public class Character {
     //=============================================================================
 
     protected Vector2 position;
-    protected Texture2D texture;
     protected Vector2 size;
     protected Color color;
 
@@ -22,9 +21,8 @@ public class Character {
 
     //=============================================================================
 
-    public Character(float x, float y, Texture2D newTexture, Vector2 newSize, int newMaxHealth) {
+    public Character(float x, float y, Vector2 newSize, int newMaxHealth) {
         position = new Vector2(x, y);
-        texture = newTexture;
         size = newSize;
         color = Color.WHITE;
 

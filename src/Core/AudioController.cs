@@ -40,7 +40,6 @@ public class AudioController {
 
                 if (track.trackVolume == 0) {
                     toRemove.Add(track);
-                    Console.WriteLine($"Stopping track '{track.trackName}' after fading out");
                 }
             }
             if (!IsMusicPlaying(currentPart)) {
@@ -155,9 +154,9 @@ public class AudioController {
             }
             else {
                 StopMusicStream(track.trackParts[track.currentlyPlaying]);
-                currentlyPlaying.Clear();
             }
         }
+        if (!fadeout)   currentlyPlaying.Clear();
     }
 
     //------------------------------------------------------
